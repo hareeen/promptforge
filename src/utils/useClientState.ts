@@ -69,7 +69,10 @@ export function useClientState(
 				}
 			} else {
 				// If there are no URL parameters, just set to pulled state
-				setState((prev) => ({ ...prev, initialization: "pulled" }));
+				setState((prev) => ({
+					...prev,
+					meta: { ...prev.meta, initialization: "pulled" },
+				}));
 			}
 		}
 	}, [state.meta.initialization]);
