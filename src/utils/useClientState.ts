@@ -63,10 +63,10 @@ export function useClientState(
 				} catch (e) {
 					console.error("Failed to decode state from URL:", e);
 				}
+			} else {
+				// If there are no URL parameters, just set to pulled state
+				setState((prev) => ({ ...prev, initialization: "pulled" }));
 			}
-		} else {
-			// If there are no URL parameters, just set to pulled state
-			setState((prev) => ({ ...prev, initialization: "pulled" }));
 		}
 	}, [state.meta.initialization]);
 
