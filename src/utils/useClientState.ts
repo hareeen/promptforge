@@ -1,6 +1,7 @@
 import type * as monaco from "monaco-editor";
 import { useEffect, useState } from "react";
 import type { ClientState } from "../types";
+import { base64UrlToBase64 } from "./base64url";
 
 // Default state values
 const DEFAULT_STATE: ClientState = {
@@ -54,11 +55,14 @@ export function useClientState(
 		if (state.meta.initialization === "pending") {
 			if (encoded) {
 				try {
-					const decoded = JSON.parse(atob(encoded));
+					const decoded = JSON.parse(atob(base64UrlToBase64(encoded)));
 					setState((prev) => ({
 						...prev,
 						...decoded,
-						initialization: "pulled",
+						meta: {
+							...prev.meta,
+							initialization: "pulled",
+						},
 					}));
 				} catch (e) {
 					console.error("Failed to decode state from URL:", e);
@@ -82,13 +86,9 @@ export function useClientState(
 			// If editor is not initialized, reset to pulled
 			setState((prev) => ({ ...prev, initialization: "pulled" }));
 		}
-	}, [
-		editorRef.current?.getDomNode(),
-		state.meta.initialization,
-		state.prompt,
-	]);
+	}, [editorRef.current, state.meta.initialization]);
 
-	// Persist state to localStorage (except initialization, isLoading, and apiKey)
+	// Persist state to localStorage (except meta)
 	useEffect(() => {
 		const { meta, ...persistedState } = state;
 		localStorage.setItem("llm_client_state", JSON.stringify(persistedState));

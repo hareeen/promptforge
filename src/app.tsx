@@ -7,6 +7,7 @@ import { FooterInfo } from "./components/FooterInfo";
 import { ParameterControls } from "./components/ParameterControls";
 import { PromptEditor } from "./components/PromptEditor";
 import type { ClientState, Message, RequestParams } from "./types";
+import { base64ToBase64Url } from "./utils/base64url";
 import { messagesToPrompt, parseMessages } from "./utils/promptUtils";
 import { useClientState } from "./utils/useClientState";
 
@@ -114,13 +115,8 @@ export const App: React.FC = () => {
 
 	// Share as URL
 	const shareAsUrl = () => {
-		const currentPrompt = editorRef.current?.getValue() || state.prompt;
-		const { meta, ...stateWithoutMeta } = state;
-		const stateToShare = {
-			...stateWithoutMeta,
-			prompt: currentPrompt,
-		};
-		const encoded = btoa(JSON.stringify(stateToShare));
+		const { meta, ...stateToShare } = state;
+		const encoded = base64ToBase64Url(btoa(JSON.stringify(stateToShare)));
 		const url = `${window.location.origin}${window.location.pathname}?state=${encoded}`;
 		navigator.clipboard.writeText(url).then(() => {
 			alert("URL copied to clipboard!");
