@@ -51,13 +51,22 @@ export function useClientState(
 		const params = new URLSearchParams(window.location.search);
 		const encoded = params.get("state");
 
-		if (encoded && state.meta.initialization === "pending") {
-			try {
-				const decoded = JSON.parse(atob(encoded));
-				setState((prev) => ({ ...prev, ...decoded, initialization: "pulled" }));
-			} catch (e) {
-				console.error("Failed to decode state from URL:", e);
+		if (state.meta.initialization === "pending") {
+			if (encoded) {
+				try {
+					const decoded = JSON.parse(atob(encoded));
+					setState((prev) => ({
+						...prev,
+						...decoded,
+						initialization: "pulled",
+					}));
+				} catch (e) {
+					console.error("Failed to decode state from URL:", e);
+				}
 			}
+		} else {
+			// If there are no URL parameters, just set to pulled state
+			setState((prev) => ({ ...prev, initialization: "pulled" }));
 		}
 	}, [state.meta.initialization]);
 
@@ -83,6 +92,7 @@ export function useClientState(
 	useEffect(() => {
 		const { meta, ...persistedState } = state;
 		localStorage.setItem("llm_client_state", JSON.stringify(persistedState));
+		localStorage.setItem("api_key", meta.apiKey || "");
 	}, [state]);
 
 	return [state, setState] as const;

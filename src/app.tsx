@@ -65,10 +65,8 @@ export const App: React.FC = () => {
 		setState((prev) => ({ ...prev, model: value }));
 	const handleTokenizerUrlChange = (value: string) =>
 		setState((prev) => ({ ...prev, tokenizerUrl: value }));
-	const handleApiKeyChange = (value: string) => {
+	const handleApiKeyChange = (value: string) =>
 		setState((prev) => ({ ...prev, meta: { ...prev.meta, apiKey: value } }));
-		localStorage.setItem("api_key", value);
-	};
 
 	// Parameter controls handler
 	const handleParamsChange = (params: Partial<RequestParams>) =>
