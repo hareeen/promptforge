@@ -8,7 +8,7 @@ RUN bun install
 RUN bun run build
 
 # Stage 2: Serve with Caddy
-FROM caddy:alpinega
+FROM caddy:alpine
 
 COPY --from=builder /app/dist /usr/share/caddy
 
