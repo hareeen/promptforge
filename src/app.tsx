@@ -241,7 +241,10 @@ export const App: React.FC = () => {
 				}`,
 			);
 		} finally {
-			setState((prev) => ({ ...prev, isLoading: false }));
+			setState((prev) => ({
+				...prev,
+				meta: { ...prev.meta, isLoading: false },
+			}));
 		}
 	};
 
