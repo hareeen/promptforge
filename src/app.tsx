@@ -22,12 +22,12 @@ function generateCompletionRequest(state: ClientState, prompt: string) {
 	return {
 		model: state.model,
 		prompt: cleanPrompt,
-		max_tokens: state.params.maxTokens || undefined,
-		temperature: state.params.temperature || undefined,
-		top_k: state.params.topK || undefined,
-		top_p: state.params.topP || undefined,
-		frequency_penalty: state.params.frequencyPenalty || undefined,
-		presence_penalty: state.params.presencePenalty || undefined,
+		max_tokens: state.params.maxTokens ?? undefined,
+		temperature: state.params.temperature ?? undefined,
+		top_k: state.params.topK ?? undefined,
+		top_p: state.params.topP ?? undefined,
+		frequency_penalty: state.params.frequencyPenalty ?? undefined,
+		presence_penalty: state.params.presencePenalty ?? undefined,
 		stream: true,
 	};
 }
@@ -37,12 +37,12 @@ function generateChatRequest(state: ClientState, messages: Message[]) {
 	return {
 		model: state.model,
 		messages,
-		max_tokens: state.params.maxTokens || undefined,
-		temperature: state.params.temperature || undefined,
-		top_k: state.params.topK || undefined,
-		top_p: state.params.topP || undefined,
-		frequency_penalty: state.params.frequencyPenalty || undefined,
-		presence_penalty: state.params.presencePenalty || undefined,
+		max_tokens: state.params.maxTokens ?? undefined,
+		temperature: state.params.temperature ?? undefined,
+		top_k: state.params.topK ?? undefined,
+		top_p: state.params.topP ?? undefined,
+		frequency_penalty: state.params.frequencyPenalty ?? undefined,
+		presence_penalty: state.params.presencePenalty ?? undefined,
 		stream: true,
 	};
 }
