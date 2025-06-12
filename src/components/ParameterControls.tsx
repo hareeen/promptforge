@@ -26,7 +26,10 @@ export const ParameterControls: React.FC<ParameterControlsProps> = ({
 						value={params.maxTokens ?? ""}
 						onChange={(e) =>
 							onChange({
-								maxTokens: Number.parseInt(e.currentTarget.value) || null,
+								maxTokens:
+									e.currentTarget.value === ""
+										? null
+										: Number.parseInt(e.currentTarget.value),
 							})
 						}
 						className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-xs mt-1"
@@ -44,7 +47,10 @@ export const ParameterControls: React.FC<ParameterControlsProps> = ({
 						value={params.temperature ?? ""}
 						onChange={(e) =>
 							onChange({
-								temperature: Number.parseFloat(e.currentTarget.value) || null,
+								temperature:
+									e.currentTarget.value === ""
+										? null
+										: Number.parseFloat(e.currentTarget.value),
 							})
 						}
 						className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-xs mt-1"
@@ -59,7 +65,10 @@ export const ParameterControls: React.FC<ParameterControlsProps> = ({
 						value={params.topK ?? ""}
 						onChange={(e) =>
 							onChange({
-								topK: Number.parseInt(e.currentTarget.value) || null,
+								topK:
+									e.currentTarget.value === ""
+										? null
+										: Number.parseInt(e.currentTarget.value),
 							})
 						}
 						className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-xs mt-1"
@@ -77,7 +86,10 @@ export const ParameterControls: React.FC<ParameterControlsProps> = ({
 						value={params.topP ?? ""}
 						onChange={(e) =>
 							onChange({
-								topP: Number.parseFloat(e.currentTarget.value) || null,
+								topP:
+									e.currentTarget.value === ""
+										? null
+										: Number.parseFloat(e.currentTarget.value),
 							})
 						}
 						className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-xs mt-1"
@@ -96,7 +108,9 @@ export const ParameterControls: React.FC<ParameterControlsProps> = ({
 						onChange={(e) =>
 							onChange({
 								frequencyPenalty:
-									Number.parseFloat(e.currentTarget.value) || null,
+									e.currentTarget.value === ""
+										? null
+										: Number.parseFloat(e.currentTarget.value),
 							})
 						}
 						className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-xs mt-1"
@@ -115,7 +129,9 @@ export const ParameterControls: React.FC<ParameterControlsProps> = ({
 						onChange={(e) =>
 							onChange({
 								presencePenalty:
-									Number.parseFloat(e.currentTarget.value) || null,
+									e.currentTarget.value === ""
+										? null
+										: Number.parseFloat(e.currentTarget.value),
 							})
 						}
 						className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-xs mt-1"
