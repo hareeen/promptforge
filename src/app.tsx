@@ -148,7 +148,7 @@ export const App: React.FC = () => {
 	// Send request to LLM API
 	const sendRequest = async () => {
 		if (state.meta.isLoading) return;
-		setState((prev) => ({ ...prev, isLoading: true }));
+		setState((prev) => ({ ...prev, meta: { ...prev.meta, isLoading: true } }));
 
 		try {
 			const currentPrompt = editorRef.current?.getValue() || state.prompt;
