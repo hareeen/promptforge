@@ -249,7 +249,6 @@ export const App: React.FC = () => {
 	};
 
 	// Keyboard shortcuts
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
 			const ctrlOrCmd = event.ctrlKey || event.metaKey;
@@ -304,7 +303,7 @@ export const App: React.FC = () => {
 			window.removeEventListener("keydown", handleKeyDown);
 			window.removeEventListener("promptEditorSubmit", sendRequest);
 		};
-	}, []);
+	});
 
 	return (
 		<div className="h-screen flex flex-col bg-zinc-950 text-white space-y-2">
